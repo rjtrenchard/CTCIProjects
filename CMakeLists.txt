@@ -3,4 +3,5 @@ project(CTCIProjects)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(CTCIProjects main.cpp)
+add_executable(CTCIProjects graphs.h graphs.cpp main.cpp)
+
