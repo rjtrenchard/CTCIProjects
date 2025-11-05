@@ -68,3 +68,44 @@ void Graph::printGraph() {
     }
 }
 
+std::vector<int> Graph::bfs(int src, int dest) {
+    return {};
+}
+
+
+std::vector<int> Graph::m_dfs(int root, int dest, std::map<int, bool>& visited) {
+
+    if (visited[root]) return {};
+    visited[root] = true;
+
+    std::vector<int> base = {root};
+
+    if (root == dest) return base;
+
+    for (const auto& children : m_graph[root]) {
+        auto search = m_dfs(children, dest, visited);
+        if (!search.empty()) {
+            base.insert(base.end(), search.begin(), search.end());
+            return base;
+        }
+    }
+
+    return {};
+}
+
+std::vector<int> Graph::dfs(int src, int dest) {
+    // 1 path
+    if (src == dest) return {src};
+
+    // impossible path
+    if (m_graph.empty()) return {};
+    if (!hasVertex(src) || !hasVertex(dest)) return {};
+
+    std::map<int, bool> visited = {};
+    return m_dfs(src, dest, visited);
+}
+
+
+
+
+
