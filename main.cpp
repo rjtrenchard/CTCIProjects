@@ -41,6 +41,15 @@ int main(int argc, char** argv) {
 
     std::cout << "DFS hops: " << hops << '\n';
 
+    auto impossibleHops = graph.dfs(6,5);
+
+    std::cout << "impossible path (5->6): " << impossibleHops << '\n';
+
+    std::cout << '\n';
+    auto bfsHops = graph.bfs(5,6);
+
+    std::cout << "BFS path: " << bfsHops << '\n';
+
     return 0;
     // TIP See CLion help at <a href="https://www.jetbrains.com/help/clion/">jetbrains.com/help/clion/</a>. Also, you can try interactive lessons for CLion by selecting 'Help | Learn IDE Features' from the main menu.
 }

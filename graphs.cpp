@@ -5,6 +5,7 @@
 #include "graphs.h"
 #include <iostream>
 #include <vector>
+#include <set>
 #include <map>
 #include <algorithm>
 
@@ -55,13 +56,13 @@ bool Graph::removeEdge(int src, int dest)
 }
 
 bool Graph::hasVertex(int const vertex) const {
-    return m_graph.find(vertex) != m_graph.end();
+    return m_graph.contains(vertex);
 }
 
 void Graph::printGraph() {
-    for (const auto element : m_graph) {
-        std::cout << element.first << " : ";
-        for (const auto list : element.second) {
+    for (const auto&[fst, snd] : m_graph) {
+        std::cout << fst << " : ";
+        for (const auto list : snd) {
             std::cout << list << ", ";
         }
         std::cout << std::endl;
@@ -69,19 +70,40 @@ void Graph::printGraph() {
 }
 
 std::vector<int> Graph::bfs(int src, int dest) {
+
+    // no vertex
+    if (!hasVertex(src) || !hasVertex(dest)) return {};
+
+    std::set<int> visited {};
+    std::queue<int> nodes {};
+    nodes.push(src);
+
+    while (!nodes.empty()) {
+        // grab next node to check
+        auto next = nodes.front();
+
+
+
+        // add all next children to queue
+        // for (const auto& )
+        nodes.pop();
+    }
+
     return {};
 }
 
 
 std::vector<int> Graph::m_dfs(int root, int dest, std::map<int, bool>& visited) {
 
+    // check if we've been here before
     if (visited[root]) return {};
     visited[root] = true;
 
+    // create the base to concatenate, return it if we are at the destination
     std::vector<int> base = {root};
-
     if (root == dest) return base;
 
+    // search all of this roots children. concat
     for (const auto& children : m_graph[root]) {
         auto search = m_dfs(children, dest, visited);
         if (!search.empty()) {
